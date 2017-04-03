@@ -1,6 +1,6 @@
 var ws = require('ws');
 
-var socket = new ws('ws://localhost:3000');
+var socket = new ws('ws://192.168.0.102:3000');
 
 socket.on('open', () => {
     socket.send('something');

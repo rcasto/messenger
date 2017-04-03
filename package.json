@@ -9,6 +9,8 @@
   "author": "Richie Casto",
   "license": "ISC",
   "dependencies": {
+    "dnsd": "^0.9.6",
+    "express": "^4.15.2",
     "ws": "^2.2.2"
   }
 }

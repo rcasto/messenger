@@ -1,8 +1,9 @@
 var ws = require('ws');
 
 var port = 3000;
-var wss = new ws.Server({ 
-    port: port
+var wss = new ws.Server({
+    port: port,
+    host: 'raspberry.local'
 }, () => {
     console.log(`Web socket server started on port ${port}`);
 });
