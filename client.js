@@ -1,14 +1,24 @@
 var ws = require('ws');
 var config = require('./config.json');
 
-var socket = new ws(`ws://${config.host}`);
+var socket = null;
+var messageHandler = null;
 
-socket.on('open', () => {
-    socket.send('something');
-});
+function connect() {
+  return new Promise((resolve, reject) => {
+    if (!socket) {
+      socket = new ws(`ws://${config.host}`);
+      socket.on('open', resolve);
+      socket.on('message', (data, flags) => 
+        messageHandler && messageHandler());
+      socket.on('error', reject);
+      socket.on('close', cleanup);
+    }
 
-socket.on('message', (data, flags) => {
-  // flags.binary will be set if a binary data is received.
-  // flags.masked will be set if the data was masked.
-});
-socket.on('error', (error) => console.error(error));
+    resolve(socket);
+  });
+}
+
+function cleanup() {
+  console.log('Socket connection closed');
+}
