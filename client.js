@@ -1,7 +1,7 @@
 var ws = require('ws');
 var config = require('./config.json');
 
-var socket = new ws(`ws://${config.host}:${config.port}`);
+var socket = new ws(`ws://${config.host}`);
 
 socket.on('open', () => {
     socket.send('something');
