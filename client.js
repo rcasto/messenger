@@ -8,11 +8,11 @@ function connect() {
   return new Promise((resolve, reject) => {
     if (!socket) {
       socket = new ws(`ws://${config.host}`);
-      socket.on('open', resolve);
+      socket.once('open', resolve);
       socket.on('message', (data, flags) => 
         messageHandler && messageHandler());
-      socket.on('error', reject);
-      socket.on('close', cleanup);
+      socket.once('error', reject);
+      socket.once('close', cleanup);
     }
 
     resolve(socket);
