@@ -5,7 +5,7 @@ var wss = new ws.Server({
     port: config.port,
     host: config.host
 }, () => {
-    console.log(`Web socket server started on port ${port}`);
+    console.log(`Web socket server started on port ${config.port}`);
 });
 
 wss.on('connection', (client) => {
