@@ -1,6 +1,7 @@
 var ws = require('ws');
+var config = require('./config.json');
 
-var socket = new ws('ws://192.168.0.102:3000');
+var socket = new ws(`ws://${config.host}:${config.port}`);
 
 socket.on('open', () => {
     socket.send('something');
@@ -10,3 +11,4 @@ socket.on('message', (data, flags) => {
   // flags.binary will be set if a binary data is received.
   // flags.masked will be set if the data was masked.
 });
+socket.on('error', (error) => console.error(error));
