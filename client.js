@@ -13,7 +13,7 @@ function connect(handle) {
         messageHandler = handle;
         socket = new ws(`ws://${config.host}`);
 
-        socket.once('open', resolve);
+        socket.once('open',() => resolve(socket));
         socket.on('message', (data, flags) =>
             messageHandler && messageHandler(data, flags));
         socket.once('error', (error) => {
