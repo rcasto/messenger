@@ -16,7 +16,7 @@ var wss = new ws.Server({
 
 wss.on('connection', (client) => {
     console.log(`New client connected: ${client}`);
-
+    client.send('Hello!');
     client.on('message', (message) => {
         console.log('received: %s', message);
     });
