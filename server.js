@@ -1,6 +1,14 @@
 var ws = require('ws');
 var config = require('./config.json');
 
+function onError(error, message) {
+    console.error(`An error occurred: ${message}\n${error}`);
+}
+
+function cleanup(server) {
+    server.close();
+}
+
 var wss = new ws.Server({
     port: config.port,
     host: config.host
@@ -16,6 +24,5 @@ wss.on('connection', (client) => {
 });
 wss.on('error', (error) => onError(error, 'WebSocket server error'));
 
-function onError(error, message) {
-    console.error(`An error occurred: ${message}\n${error}`);
-}
+process.on('exit', () => cleanup(wss));
+process.on('SIGINT', () => cleanup(wss));

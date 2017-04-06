@@ -26,10 +26,13 @@ function connect(handle) {
 
 function cleanup() {
     console.log('Socket connection closed');
-    socket.close();
+    socket && socket.close();
     socket = null;
     messageHandler = null;
 }
+
+process.on('exit', () => cleanup);
+process.on('SIGINT', cleanup);
 
 module.exports = {
     connect,
