@@ -8,7 +8,10 @@ function create(messageRouter, config) {
     }, () => logger.log(`Web socket server started on port ${config.port}`))
         .on('connection', (client) => {
             logger.log(`New client connected: ${client}`);
-            client.on('message', messageRouter);
+            client.on('message', (message) => {
+                logger.log(`Message received from client: ${message}`);
+                messageRouter && messageRouter(message);
+            });
             client.on('error', (error) => logger.error('Client socket error', error));
         })
         .on('error', (error) => logger.error('WebSocket server error', error));
