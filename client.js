@@ -1,17 +1,21 @@
 var ws = require('ws');
-var config = require('./config.json');
+var logger = require('./logger');
 
 var socket = null;
 var messageHandler = null;
 
-function connect(handle) {
+function connect(url, handle) {
     return new Promise((resolve, reject) => {
+        if (!url || !handle) {
+          return reject('Invalid invocation parameters: ${url} : ${handle}');
+        }
+
         if (socket) {
             return resolve(socket);
         }
 
         messageHandler = handle;
-        socket = new ws(`ws://${config.host}`);
+        socket = new ws(url);
 
         socket.once('open',() => resolve(socket));
         socket.on('message', (data, flags) =>
@@ -25,7 +29,7 @@ function connect(handle) {
 }
 
 function cleanup() {
-    console.log('Socket connection closed');
+    logger.log('Socket connection closed');
     socket && socket.close();
     socket = null;
     messageHandler = null;
