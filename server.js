@@ -12,8 +12,11 @@ function create(messageRouter, config) {
             client.on('error', (error) => logger.error('Client socket error', error));
         })
         .on('error', (error) => logger.error('WebSocket server error', error));
+
     process.on('exit', () => cleanup(server));
     process.on('SIGINT', () => cleanup(server));
+    
+    return server;
 }
 
 function cleanup(server) {
