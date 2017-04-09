@@ -1,5 +1,5 @@
-var server = require('./server');
-var client = require('./client');
+var server = require('./lib/server');
+var client = require('./lib/client');
 module.exports = {
     server,
     client
