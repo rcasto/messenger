@@ -2,8 +2,8 @@ var assert = require('assert');
 var sinon = require('sinon');
 
 /* Dependency modules */
-var socketService = require('../socketService.js');
-var logger = require('../logger.js');
+var socketService = require('../lib/socketService.js');
+var logger = require('../lib/logger.js');
 
 /* Modules being tested */
 var server = require('../server.js');

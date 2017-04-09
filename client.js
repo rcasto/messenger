@@ -1,5 +1,5 @@
-var socketService = require('./socketService');
-var logger = require('./logger');
+var socketService = require('./lib/socketService');
+var logger = require('./lib/logger');
 
 var socket = null;
 var messageHandler = null;
