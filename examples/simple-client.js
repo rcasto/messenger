@@ -1,10 +1,10 @@
-var clientModule = require('./client');
+var clientModule = require('../client');
 
 function messageHandle(data, flags) {
     console.log(`Message: ${data} - Flags: ${flags}`);
 }
 
-clientModule.connect(messageHandle)
+clientModule.connect('ws://localhost:3000', messageHandle)
     .then((socket) => {
         socket.send(JSON.stringify({
             text: 'Testing this shit out'

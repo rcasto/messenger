@@ -1,7 +1,7 @@
 var socketService = require('./lib/socketService');
 var logger = require('./lib/logger');
 
-function create(messageRouter, config) {
+function create(config) {
     var server = socketService.createServerSocket({
         port: config.port,
         host: config.host
@@ -11,7 +11,7 @@ function create(messageRouter, config) {
         logger.log(`New client connected: ${client}`);
         client.on('message', (message) => {
             logger.log(`Message received from client: ${message}`);
-            messageRouter && messageRouter(message);
+            config.messageHandler && config.messageHandler(message);
         });
         client.on('error', (error) => logger.error('Client socket error', error));
     });
