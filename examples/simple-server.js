@@ -1,4 +1,4 @@
-var server = require('../server.js');
+var server = require('../lib/server.js');
 
 function messageHandler(message) {
     console.log(`Message received from client: ${message}`);

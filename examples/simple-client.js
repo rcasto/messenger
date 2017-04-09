@@ -1,4 +1,4 @@
-var clientModule = require('../client');
+var clientModule = require('../lib/client');
 
 function messageHandle(data, flags) {
     console.log(`Message: ${data} - Flags: ${flags}`);
