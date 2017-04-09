@@ -1,4 +1,4 @@
-var ws = require('ws');
+var socketService = require('./socketService');
 var logger = require('./logger');
 
 var socket = null;
@@ -15,9 +15,9 @@ function connect(url, handle) {
         }
 
         messageHandler = handle;
-        socket = new ws(url);
+        socket = socketService.createClientSocket(url);
 
-        socket.once('open',() => resolve(socket));
+        socket.once('open', () => resolve(socket));
         socket.on('message', (data, flags) =>
             messageHandler && messageHandler(data, flags));
         socket.once('error', (error) => {
