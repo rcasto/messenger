@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "uuid": "^3.0.1",
-    "ws": "^2.2.2"
+    "ws": "^2.2.3"
   },
   "devDependencies": {
     "mocha": "^3.2.0",
